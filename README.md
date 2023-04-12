@@ -82,6 +82,16 @@ Considerations:
 - Use %1 in the command to get the path of the selected file or folder, for example: "notepad.exe %1"
 - All functions raise an exception if an error occurs type `WindowsError`
 
+## TODO
+- Add support for other scopes.
+  - Recycle Bin
+  - New Menu
+  - Send To
+  - Open With
+  - win+X
+  - Disk
+  - Desktop
+  - 
 
 ## License
 
