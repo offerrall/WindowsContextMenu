@@ -91,7 +91,6 @@ Considerations:
   - win+X
   - Disk
   - Desktop
-  - 
 
 ## License
 
