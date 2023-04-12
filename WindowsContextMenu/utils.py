@@ -86,6 +86,10 @@ def get_scopes(scope: str):
     elif scope.startswith("EXTENSION_SFA"):
         extension = scope.split("_")[2]
         key_path = f"Software\\Classes\\SystemFileAssociations\\{extension}\\shell"
+    elif scope == "DESKTOP":
+        key_path = "DesktopBackground\\Shell\\"
+    elif scope == "RECYCLE_BIN":
+        key_path = "CLSID\\{645FF040-5081-101B-9F08-00AA002F954E}\\shell"
     else:
         raise ValueError("Invalid scope.")
     

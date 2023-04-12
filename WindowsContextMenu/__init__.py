@@ -55,7 +55,14 @@ def examples():
     print(list_items("FILES", parent="My Commands/Subfolder"))
 
     # Delete the top-level folder and all its contents
-    remove_item("FILES", "My Commands") ```
+    remove_item("FILES", "My Commands") 
+    
+    # Create a command in the Desktop context menu
+    create_simple_command("DESKTOP", "Escritorio", "cmd.exe /k cd %1")
+    
+    # Create a command in the Recycle Bin context menu
+    create_simple_command("RECYCLE_BIN", "Recycle Bin Custom", "cmd.exe")
+    ```
     """
     
     pass

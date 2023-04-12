@@ -11,6 +11,8 @@ def get_hive_from_key_path(key_path: str) -> int:
     """
     if "SystemFileAssociations" in key_path:
         return winreg.HKEY_LOCAL_MACHINE
+    elif "DesktopBackground" in key_path or "CLSID" in key_path:
+        return winreg.HKEY_CLASSES_ROOT
     else:
         return winreg.HKEY_CURRENT_USER
 

@@ -160,41 +160,45 @@
 </span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>    <span class="k">elif</span> <span class="n">scope</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;EXTENSION_SFA&quot;</span><span class="p">):</span>
 </span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>        <span class="n">extension</span> <span class="o">=</span> <span class="n">scope</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
 </span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>        <span class="n">key_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Software</span><span class="se">\\</span><span class="s2">Classes</span><span class="se">\\</span><span class="s2">SystemFileAssociations</span><span class="se">\\</span><span class="si">{</span><span class="n">extension</span><span class="si">}</span><span class="se">\\</span><span class="s2">shell&quot;</span>
-</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>    <span class="k">else</span><span class="p">:</span>
-</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid scope.&quot;</span><span class="p">)</span>
-</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>    
-</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>    <span class="k">return</span> <span class="n">key_path</span>
-</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>
-</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a><span class="k">def</span> <span class="nf">transform_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>    <span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a><span class="sd">    Transform a path of the form /Abuelo/Hijo/Nieto/ to /Abuelo/shell/Hijo/shell/Nieto/shell</span>
-</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a><span class="sd">    </span>
-</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a><span class="sd">    :param path: The path to transform.</span>
-</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a><span class="sd">    :type path: str</span>
-</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a><span class="sd">    :return: The transformed path.</span>
-</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a><span class="sd">    :rtype: str</span>
-</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>    <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>    <span class="n">parts</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>    <span class="n">transformed</span> <span class="o">=</span> <span class="p">[</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;shell&quot;</span><span class="p">]</span>
-</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>    <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>        <span class="n">transformed</span> <span class="o">+=</span> <span class="p">[</span><span class="n">part</span><span class="p">,</span> <span class="s2">&quot;shell&quot;</span><span class="p">]</span>
-</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>    <span class="k">return</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">transformed</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
-</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>
-</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a><span class="k">def</span> <span class="nf">key_exists</span><span class="p">(</span><span class="n">key_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>    <span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a><span class="sd">    Checks if a key exists in the Windows Registry.</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>    <span class="k">elif</span> <span class="n">scope</span> <span class="o">==</span> <span class="s2">&quot;DESKTOP&quot;</span><span class="p">:</span>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>        <span class="n">key_path</span> <span class="o">=</span> <span class="s2">&quot;DesktopBackground</span><span class="se">\\</span><span class="s2">Shell</span><span class="se">\\</span><span class="s2">&quot;</span>
+</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>    <span class="k">elif</span> <span class="n">scope</span> <span class="o">==</span> <span class="s2">&quot;RECYCLE_BIN&quot;</span><span class="p">:</span>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>        <span class="n">key_path</span> <span class="o">=</span> <span class="s2">&quot;CLSID</span><span class="se">\\</span><span class="s2">{645FF040-5081-101B-9F08-00AA002F954E}</span><span class="se">\\</span><span class="s2">shell&quot;</span>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid scope.&quot;</span><span class="p">)</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>    
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>    <span class="k">return</span> <span class="n">key_path</span>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a><span class="k">def</span> <span class="nf">transform_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>    <span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a><span class="sd">    Transform a path of the form /Abuelo/Hijo/Nieto/ to /Abuelo/shell/Hijo/shell/Nieto/shell</span>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a><span class="sd">    </span>
+</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a><span class="sd">    :param path: The path to transform.</span>
+</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a><span class="sd">    :type path: str</span>
+</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a><span class="sd">    :return: The transformed path.</span>
+</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a><span class="sd">    :rtype: str</span>
+</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>    <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>    <span class="n">parts</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>    <span class="n">transformed</span> <span class="o">=</span> <span class="p">[</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;shell&quot;</span><span class="p">]</span>
+</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>    <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>        <span class="n">transformed</span> <span class="o">+=</span> <span class="p">[</span><span class="n">part</span><span class="p">,</span> <span class="s2">&quot;shell&quot;</span><span class="p">]</span>
+</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>    <span class="k">return</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">transformed</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
 </span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>
-</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a><span class="sd">    :param key_path: The path of the key in the Windows Registry.</span>
-</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a><span class="sd">    :type key_path: str</span>
-</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a><span class="sd">    :return: True if the key exists, False otherwise.</span>
-</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a><span class="sd">    :rtype: bool</span>
-</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>    
-</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>    <span class="n">hive</span> <span class="o">=</span> <span class="n">get_hive_from_key_path</span><span class="p">(</span><span class="n">key_path</span><span class="p">)</span>
-</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>    <span class="n">parent_key_path</span><span class="p">,</span> <span class="n">key_name</span> <span class="o">=</span> <span class="n">key_path</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>    
-</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>    <span class="k">return</span> <span class="n">key_name</span> <span class="ow">in</span> <span class="n">list_keys</span><span class="p">(</span><span class="n">parent_key_path</span><span class="p">,</span> <span class="n">hive</span><span class="p">)</span>
+</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a><span class="k">def</span> <span class="nf">key_exists</span><span class="p">(</span><span class="n">key_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>    <span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a><span class="sd">    Checks if a key exists in the Windows Registry.</span>
+</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>
+</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a><span class="sd">    :param key_path: The path of the key in the Windows Registry.</span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a><span class="sd">    :type key_path: str</span>
+</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a><span class="sd">    :return: True if the key exists, False otherwise.</span>
+</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a><span class="sd">    :rtype: bool</span>
+</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>    
+</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>    <span class="n">hive</span> <span class="o">=</span> <span class="n">get_hive_from_key_path</span><span class="p">(</span><span class="n">key_path</span><span class="p">)</span>
+</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a>    <span class="n">parent_key_path</span><span class="p">,</span> <span class="n">key_name</span> <span class="o">=</span> <span class="n">key_path</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>    
+</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a>    <span class="k">return</span> <span class="n">key_name</span> <span class="ow">in</span> <span class="n">list_keys</span><span class="p">(</span><span class="n">parent_key_path</span><span class="p">,</span> <span class="n">hive</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -398,10 +402,14 @@
 </span><span id="get_scopes-87"><a href="#get_scopes-87"><span class="linenos">87</span></a>    <span class="k">elif</span> <span class="n">scope</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;EXTENSION_SFA&quot;</span><span class="p">):</span>
 </span><span id="get_scopes-88"><a href="#get_scopes-88"><span class="linenos">88</span></a>        <span class="n">extension</span> <span class="o">=</span> <span class="n">scope</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
 </span><span id="get_scopes-89"><a href="#get_scopes-89"><span class="linenos">89</span></a>        <span class="n">key_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Software</span><span class="se">\\</span><span class="s2">Classes</span><span class="se">\\</span><span class="s2">SystemFileAssociations</span><span class="se">\\</span><span class="si">{</span><span class="n">extension</span><span class="si">}</span><span class="se">\\</span><span class="s2">shell&quot;</span>
-</span><span id="get_scopes-90"><a href="#get_scopes-90"><span class="linenos">90</span></a>    <span class="k">else</span><span class="p">:</span>
-</span><span id="get_scopes-91"><a href="#get_scopes-91"><span class="linenos">91</span></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid scope.&quot;</span><span class="p">)</span>
-</span><span id="get_scopes-92"><a href="#get_scopes-92"><span class="linenos">92</span></a>    
-</span><span id="get_scopes-93"><a href="#get_scopes-93"><span class="linenos">93</span></a>    <span class="k">return</span> <span class="n">key_path</span>
+</span><span id="get_scopes-90"><a href="#get_scopes-90"><span class="linenos">90</span></a>    <span class="k">elif</span> <span class="n">scope</span> <span class="o">==</span> <span class="s2">&quot;DESKTOP&quot;</span><span class="p">:</span>
+</span><span id="get_scopes-91"><a href="#get_scopes-91"><span class="linenos">91</span></a>        <span class="n">key_path</span> <span class="o">=</span> <span class="s2">&quot;DesktopBackground</span><span class="se">\\</span><span class="s2">Shell</span><span class="se">\\</span><span class="s2">&quot;</span>
+</span><span id="get_scopes-92"><a href="#get_scopes-92"><span class="linenos">92</span></a>    <span class="k">elif</span> <span class="n">scope</span> <span class="o">==</span> <span class="s2">&quot;RECYCLE_BIN&quot;</span><span class="p">:</span>
+</span><span id="get_scopes-93"><a href="#get_scopes-93"><span class="linenos">93</span></a>        <span class="n">key_path</span> <span class="o">=</span> <span class="s2">&quot;CLSID</span><span class="se">\\</span><span class="s2">{645FF040-5081-101B-9F08-00AA002F954E}</span><span class="se">\\</span><span class="s2">shell&quot;</span>
+</span><span id="get_scopes-94"><a href="#get_scopes-94"><span class="linenos">94</span></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="get_scopes-95"><a href="#get_scopes-95"><span class="linenos">95</span></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid scope.&quot;</span><span class="p">)</span>
+</span><span id="get_scopes-96"><a href="#get_scopes-96"><span class="linenos">96</span></a>    
+</span><span id="get_scopes-97"><a href="#get_scopes-97"><span class="linenos">97</span></a>    <span class="k">return</span> <span class="n">key_path</span>
 </span></pre></div>
 
 
@@ -439,21 +447,21 @@
 
     </div>
     <a class="headerlink" href="#transform_path"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="transform_path-95"><a href="#transform_path-95"><span class="linenos"> 95</span></a><span class="k">def</span> <span class="nf">transform_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="transform_path-96"><a href="#transform_path-96"><span class="linenos"> 96</span></a>    <span class="sd">&quot;&quot;&quot;</span>
-</span><span id="transform_path-97"><a href="#transform_path-97"><span class="linenos"> 97</span></a><span class="sd">    Transform a path of the form /Abuelo/Hijo/Nieto/ to /Abuelo/shell/Hijo/shell/Nieto/shell</span>
-</span><span id="transform_path-98"><a href="#transform_path-98"><span class="linenos"> 98</span></a><span class="sd">    </span>
-</span><span id="transform_path-99"><a href="#transform_path-99"><span class="linenos"> 99</span></a><span class="sd">    :param path: The path to transform.</span>
-</span><span id="transform_path-100"><a href="#transform_path-100"><span class="linenos">100</span></a><span class="sd">    :type path: str</span>
-</span><span id="transform_path-101"><a href="#transform_path-101"><span class="linenos">101</span></a><span class="sd">    :return: The transformed path.</span>
-</span><span id="transform_path-102"><a href="#transform_path-102"><span class="linenos">102</span></a><span class="sd">    :rtype: str</span>
-</span><span id="transform_path-103"><a href="#transform_path-103"><span class="linenos">103</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="transform_path-104"><a href="#transform_path-104"><span class="linenos">104</span></a>    <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-</span><span id="transform_path-105"><a href="#transform_path-105"><span class="linenos">105</span></a>    <span class="n">parts</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-</span><span id="transform_path-106"><a href="#transform_path-106"><span class="linenos">106</span></a>    <span class="n">transformed</span> <span class="o">=</span> <span class="p">[</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;shell&quot;</span><span class="p">]</span>
-</span><span id="transform_path-107"><a href="#transform_path-107"><span class="linenos">107</span></a>    <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-</span><span id="transform_path-108"><a href="#transform_path-108"><span class="linenos">108</span></a>        <span class="n">transformed</span> <span class="o">+=</span> <span class="p">[</span><span class="n">part</span><span class="p">,</span> <span class="s2">&quot;shell&quot;</span><span class="p">]</span>
-</span><span id="transform_path-109"><a href="#transform_path-109"><span class="linenos">109</span></a>    <span class="k">return</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">transformed</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="transform_path-99"><a href="#transform_path-99"><span class="linenos"> 99</span></a><span class="k">def</span> <span class="nf">transform_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="transform_path-100"><a href="#transform_path-100"><span class="linenos">100</span></a>    <span class="sd">&quot;&quot;&quot;</span>
+</span><span id="transform_path-101"><a href="#transform_path-101"><span class="linenos">101</span></a><span class="sd">    Transform a path of the form /Abuelo/Hijo/Nieto/ to /Abuelo/shell/Hijo/shell/Nieto/shell</span>
+</span><span id="transform_path-102"><a href="#transform_path-102"><span class="linenos">102</span></a><span class="sd">    </span>
+</span><span id="transform_path-103"><a href="#transform_path-103"><span class="linenos">103</span></a><span class="sd">    :param path: The path to transform.</span>
+</span><span id="transform_path-104"><a href="#transform_path-104"><span class="linenos">104</span></a><span class="sd">    :type path: str</span>
+</span><span id="transform_path-105"><a href="#transform_path-105"><span class="linenos">105</span></a><span class="sd">    :return: The transformed path.</span>
+</span><span id="transform_path-106"><a href="#transform_path-106"><span class="linenos">106</span></a><span class="sd">    :rtype: str</span>
+</span><span id="transform_path-107"><a href="#transform_path-107"><span class="linenos">107</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="transform_path-108"><a href="#transform_path-108"><span class="linenos">108</span></a>    <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span id="transform_path-109"><a href="#transform_path-109"><span class="linenos">109</span></a>    <span class="n">parts</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span id="transform_path-110"><a href="#transform_path-110"><span class="linenos">110</span></a>    <span class="n">transformed</span> <span class="o">=</span> <span class="p">[</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;shell&quot;</span><span class="p">]</span>
+</span><span id="transform_path-111"><a href="#transform_path-111"><span class="linenos">111</span></a>    <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+</span><span id="transform_path-112"><a href="#transform_path-112"><span class="linenos">112</span></a>        <span class="n">transformed</span> <span class="o">+=</span> <span class="p">[</span><span class="n">part</span><span class="p">,</span> <span class="s2">&quot;shell&quot;</span><span class="p">]</span>
+</span><span id="transform_path-113"><a href="#transform_path-113"><span class="linenos">113</span></a>    <span class="k">return</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">transformed</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
 </span></pre></div>
 
 
@@ -485,20 +493,20 @@
 
     </div>
     <a class="headerlink" href="#key_exists"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="key_exists-111"><a href="#key_exists-111"><span class="linenos">111</span></a><span class="k">def</span> <span class="nf">key_exists</span><span class="p">(</span><span class="n">key_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span id="key_exists-112"><a href="#key_exists-112"><span class="linenos">112</span></a>    <span class="sd">&quot;&quot;&quot;</span>
-</span><span id="key_exists-113"><a href="#key_exists-113"><span class="linenos">113</span></a><span class="sd">    Checks if a key exists in the Windows Registry.</span>
-</span><span id="key_exists-114"><a href="#key_exists-114"><span class="linenos">114</span></a>
-</span><span id="key_exists-115"><a href="#key_exists-115"><span class="linenos">115</span></a><span class="sd">    :param key_path: The path of the key in the Windows Registry.</span>
-</span><span id="key_exists-116"><a href="#key_exists-116"><span class="linenos">116</span></a><span class="sd">    :type key_path: str</span>
-</span><span id="key_exists-117"><a href="#key_exists-117"><span class="linenos">117</span></a><span class="sd">    :return: True if the key exists, False otherwise.</span>
-</span><span id="key_exists-118"><a href="#key_exists-118"><span class="linenos">118</span></a><span class="sd">    :rtype: bool</span>
-</span><span id="key_exists-119"><a href="#key_exists-119"><span class="linenos">119</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="key_exists-120"><a href="#key_exists-120"><span class="linenos">120</span></a>    
-</span><span id="key_exists-121"><a href="#key_exists-121"><span class="linenos">121</span></a>    <span class="n">hive</span> <span class="o">=</span> <span class="n">get_hive_from_key_path</span><span class="p">(</span><span class="n">key_path</span><span class="p">)</span>
-</span><span id="key_exists-122"><a href="#key_exists-122"><span class="linenos">122</span></a>    <span class="n">parent_key_path</span><span class="p">,</span> <span class="n">key_name</span> <span class="o">=</span> <span class="n">key_path</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="key_exists-123"><a href="#key_exists-123"><span class="linenos">123</span></a>    
-</span><span id="key_exists-124"><a href="#key_exists-124"><span class="linenos">124</span></a>    <span class="k">return</span> <span class="n">key_name</span> <span class="ow">in</span> <span class="n">list_keys</span><span class="p">(</span><span class="n">parent_key_path</span><span class="p">,</span> <span class="n">hive</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="key_exists-115"><a href="#key_exists-115"><span class="linenos">115</span></a><span class="k">def</span> <span class="nf">key_exists</span><span class="p">(</span><span class="n">key_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="key_exists-116"><a href="#key_exists-116"><span class="linenos">116</span></a>    <span class="sd">&quot;&quot;&quot;</span>
+</span><span id="key_exists-117"><a href="#key_exists-117"><span class="linenos">117</span></a><span class="sd">    Checks if a key exists in the Windows Registry.</span>
+</span><span id="key_exists-118"><a href="#key_exists-118"><span class="linenos">118</span></a>
+</span><span id="key_exists-119"><a href="#key_exists-119"><span class="linenos">119</span></a><span class="sd">    :param key_path: The path of the key in the Windows Registry.</span>
+</span><span id="key_exists-120"><a href="#key_exists-120"><span class="linenos">120</span></a><span class="sd">    :type key_path: str</span>
+</span><span id="key_exists-121"><a href="#key_exists-121"><span class="linenos">121</span></a><span class="sd">    :return: True if the key exists, False otherwise.</span>
+</span><span id="key_exists-122"><a href="#key_exists-122"><span class="linenos">122</span></a><span class="sd">    :rtype: bool</span>
+</span><span id="key_exists-123"><a href="#key_exists-123"><span class="linenos">123</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="key_exists-124"><a href="#key_exists-124"><span class="linenos">124</span></a>    
+</span><span id="key_exists-125"><a href="#key_exists-125"><span class="linenos">125</span></a>    <span class="n">hive</span> <span class="o">=</span> <span class="n">get_hive_from_key_path</span><span class="p">(</span><span class="n">key_path</span><span class="p">)</span>
+</span><span id="key_exists-126"><a href="#key_exists-126"><span class="linenos">126</span></a>    <span class="n">parent_key_path</span><span class="p">,</span> <span class="n">key_name</span> <span class="o">=</span> <span class="n">key_path</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="key_exists-127"><a href="#key_exists-127"><span class="linenos">127</span></a>    
+</span><span id="key_exists-128"><a href="#key_exists-128"><span class="linenos">128</span></a>    <span class="k">return</span> <span class="n">key_name</span> <span class="ow">in</span> <span class="n">list_keys</span><span class="p">(</span><span class="n">parent_key_path</span><span class="p">,</span> <span class="n">hive</span><span class="p">)</span>
 </span></pre></div>
 
 

@@ -109,10 +109,17 @@ WindowsContextMenu    </h1>
 </span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a><span class="sd">    print(list_items(&quot;FILES&quot;, parent=&quot;My Commands/Subfolder&quot;))</span>
 </span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>
 </span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a><span class="sd">    # Delete the top-level folder and all its contents</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a><span class="sd">    remove_item(&quot;FILES&quot;, &quot;My Commands&quot;) ```</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>    
-</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>    <span class="k">pass</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a><span class="sd">    remove_item(&quot;FILES&quot;, &quot;My Commands&quot;) </span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a><span class="sd">    </span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a><span class="sd">    # Create a command in the Desktop context menu</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a><span class="sd">    create_simple_command(&quot;DESKTOP&quot;, &quot;Escritorio&quot;, &quot;cmd.exe /k cd %1&quot;)</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a><span class="sd">    </span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a><span class="sd">    # Create a command in the Recycle Bin context menu</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a><span class="sd">    create_simple_command(&quot;RECYCLE_BIN&quot;, &quot;Recycle Bin Custom&quot;, &quot;cmd.exe&quot;)</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a><span class="sd">    ```</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a>    
+</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a>    <span class="k">pass</span>
 </span></pre></div>
 
 
@@ -182,10 +189,17 @@ WindowsContextMenu    </h1>
 </span><span id="examples-56"><a href="#examples-56"><span class="linenos">56</span></a><span class="sd">    print(list_items(&quot;FILES&quot;, parent=&quot;My Commands/Subfolder&quot;))</span>
 </span><span id="examples-57"><a href="#examples-57"><span class="linenos">57</span></a>
 </span><span id="examples-58"><a href="#examples-58"><span class="linenos">58</span></a><span class="sd">    # Delete the top-level folder and all its contents</span>
-</span><span id="examples-59"><a href="#examples-59"><span class="linenos">59</span></a><span class="sd">    remove_item(&quot;FILES&quot;, &quot;My Commands&quot;) ```</span>
-</span><span id="examples-60"><a href="#examples-60"><span class="linenos">60</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="examples-61"><a href="#examples-61"><span class="linenos">61</span></a>    
-</span><span id="examples-62"><a href="#examples-62"><span class="linenos">62</span></a>    <span class="k">pass</span>
+</span><span id="examples-59"><a href="#examples-59"><span class="linenos">59</span></a><span class="sd">    remove_item(&quot;FILES&quot;, &quot;My Commands&quot;) </span>
+</span><span id="examples-60"><a href="#examples-60"><span class="linenos">60</span></a><span class="sd">    </span>
+</span><span id="examples-61"><a href="#examples-61"><span class="linenos">61</span></a><span class="sd">    # Create a command in the Desktop context menu</span>
+</span><span id="examples-62"><a href="#examples-62"><span class="linenos">62</span></a><span class="sd">    create_simple_command(&quot;DESKTOP&quot;, &quot;Escritorio&quot;, &quot;cmd.exe /k cd %1&quot;)</span>
+</span><span id="examples-63"><a href="#examples-63"><span class="linenos">63</span></a><span class="sd">    </span>
+</span><span id="examples-64"><a href="#examples-64"><span class="linenos">64</span></a><span class="sd">    # Create a command in the Recycle Bin context menu</span>
+</span><span id="examples-65"><a href="#examples-65"><span class="linenos">65</span></a><span class="sd">    create_simple_command(&quot;RECYCLE_BIN&quot;, &quot;Recycle Bin Custom&quot;, &quot;cmd.exe&quot;)</span>
+</span><span id="examples-66"><a href="#examples-66"><span class="linenos">66</span></a><span class="sd">    ```</span>
+</span><span id="examples-67"><a href="#examples-67"><span class="linenos">67</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="examples-68"><a href="#examples-68"><span class="linenos">68</span></a>    
+</span><span id="examples-69"><a href="#examples-69"><span class="linenos">69</span></a>    <span class="k">pass</span>
 </span></pre></div>
 
 
@@ -240,7 +254,13 @@ WindowsContextMenu    </h1>
 <span class="nb">print</span><span class="p">(</span><span class="n">list_items</span><span class="p">(</span><span class="s2">&quot;FILES&quot;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="s2">&quot;My Commands/Subfolder&quot;</span><span class="p">))</span>
 
 <span class="c1"># Delete the top-level folder and all its contents</span>
-<span class="n">remove_item</span><span class="p">(</span><span class="s2">&quot;FILES&quot;</span><span class="p">,</span> <span class="s2">&quot;My Commands&quot;</span><span class="p">)</span>
+<span class="n">remove_item</span><span class="p">(</span><span class="s2">&quot;FILES&quot;</span><span class="p">,</span> <span class="s2">&quot;My Commands&quot;</span><span class="p">)</span> 
+
+<span class="c1"># Create a command in the Desktop context menu</span>
+<span class="n">create_simple_command</span><span class="p">(</span><span class="s2">&quot;DESKTOP&quot;</span><span class="p">,</span> <span class="s2">&quot;Escritorio&quot;</span><span class="p">,</span> <span class="s2">&quot;cmd.exe /k cd %1&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create a command in the Recycle Bin context menu</span>
+<span class="n">create_simple_command</span><span class="p">(</span><span class="s2">&quot;RECYCLE_BIN&quot;</span><span class="p">,</span> <span class="s2">&quot;Recycle Bin Custom&quot;</span><span class="p">,</span> <span class="s2">&quot;cmd.exe&quot;</span><span class="p">)</span>
 </code></pre></div>
 </div>
 

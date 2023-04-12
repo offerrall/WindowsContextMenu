@@ -204,6 +204,8 @@ def get_available_scopes():
         "DIRECTORY_BACKGROUND": "Applies to directory/folder backgrounds",
         "DRIVE": "Applies to drives (e.g., USB drives)",
         "EXTENSION_SFA_": "Applies to files with a specific extension. Look at the documentation for more information.",
+        "RECYCLE_BIN": "Applies to the recycle bin",
+        "DESKTOP": "Applies to the desktop",
     }
 
     return available_scopes

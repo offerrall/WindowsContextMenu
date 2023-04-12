@@ -1,10 +1,10 @@
-# Context Menu Manager
+# PyWindowsContextMenu
 
-Context Menu Manager is a Python library for creating and managing context menu items in Windows.
+PyWindowsContextMenu is a Python library for creating and managing context menu items in Windows.
 
 This library provides a simple and intuitive API for creating context menu items for files and folders in Windows. It supports creating simple commands and nested menus, as well as listing and removing existing items.
 
-This library was created for personal use but is shared in the hopes that it may be useful to others or inspire contributions. Contributions are welcome via pull requests.
+This library was created for personal use but is shared in the hopes that it may be useful to others or inspire contributions. Contributions are welcome via pull requests or issues.
 
 ## Installation
 
@@ -29,6 +29,8 @@ In Windows, a context menu can have different scopes depending on where it is di
 - `DIRECTORY_BACKGROUND`: for context menus displayed when right-clicking on the background of a folder.
 - `DRIVE`: for context menus displayed when right-clicking on a drive.
 - `EXTENSION_SFA_<extension>`: for context menus displayed when right-clicking on a file with a specific extension.
+- `RECYCLE_BIN`: for context menus displayed when right-clicking on the Recycle Bin.
+- `DESKTOP`: for context menus displayed when right-clicking on the desktop.
 
 Paths in the registry for the different scopes:
 - `FILES`: `HKEY_CURRENT_USER\*\shell`
@@ -36,15 +38,14 @@ Paths in the registry for the different scopes:
 - `DIRECTORY_BACKGROUND`: `HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell`
 - `DRIVE`: `HKEY_CURRENT_USER\Software\Classes\Drive\shell`
 - `EXTENSION_SFA_<extension>`: `HKEY_LOCAL_MACHINE\Software\Classes\SystemFileAssociations\{extension}\shell`
+- `RECYCLE_BIN`: `HKEY_CLASSES_ROOT\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\shell`
+- `DESKTOP`: `HKEY_CLASSES_ROOT\DesktopBackground\Shell\`	
 
 The `get_available_scopes()` function can be used to get a list of all available scopes. The scope parameter is used in various functions to specify where the context menu items should be created or removed.
 
 ## Usage
 
 All Examples and API documentation can be found in the [Doc](https://offerrall.github.io/WindowsContextMenu/WindowsContextMenu.html).
-
-
-
 Little example:
 
 ```python
@@ -84,15 +85,10 @@ Considerations:
 
 ## TODO
 - Add support for other scopes.
-  - Recycle Bin
   - New Menu
   - Send To
   - Open With
   - win+X
-  - Disk
-  - Desktop
 
 ## License
-
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-
