@@ -1,6 +1,6 @@
-# PyWindowsContextMenu
+# WindowsContextMenu
 
-PyWindowsContextMenu is a Python library for creating and managing context menu items in Windows.
+WindowsContextMenu is a Python library for creating and managing context menu items in Windows.
 
 This library provides a simple and intuitive API for creating context menu items for files and folders in Windows. It supports creating simple commands and nested menus, as well as listing and removing existing items.
 
