@@ -78,7 +78,7 @@ def get_scopes(scope: str):
     if scope == "FILES":
         key_path = "Software\\Classes\\*\\shell"
     elif scope == "DIRECTORY":
-        key_path = "Software\\Classes\\Directory\\Background\\shell"
+        key_path = "Software\\Classes\\Directory\\shell"
     elif scope == "DIRECTORY_BACKGROUND":
         key_path = "Software\\Classes\\Directory\\Background\\shell"
     elif scope == "DRIVE":
